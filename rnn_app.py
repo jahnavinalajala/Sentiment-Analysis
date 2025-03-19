@@ -7,8 +7,18 @@ from tensorflow.keras.models import load_model
 
 word_index = imdb.get_word_index()
 reverse_word_index = {value:key for key,value in word_index.items()}
-model = load_model(r'C:\Users\JahnaviNalaJala\Documents\gen ai vs code\particies\projects\RNN\model_rnn_imbd.h5')
-model.summary()
+import os
+from tensorflow.keras.models import load_model
+
+# Get the current directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Correct relative path to model file
+model_path = os.path.join(BASE_DIR, 'model_rnn_imdb.h5')
+
+# Load the model
+model = load_model(model_path)
+
 def decode_review(encoded_review):
     return ' '.join([reverse_word_index.get(i -3,"?")for i in encoded_review])
 def preprocess_text(text):
